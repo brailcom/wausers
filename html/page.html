@@ -1,0 +1,54 @@
+<tal:block metal:define-macro="icing">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>WAssistant -- <span metal:define-slot="title">title</span></title>
+<meta http-equiv="Content-Type" tal:attributes="content string:text/html;; charset=${request/client/charset}">
+</head>
+<body>
+
+<div>
+<map title="Navigation Bar" name="">
+  <p>
+    <tal:block tal:condition="python:request.user.username!='anonymous'">
+      [<a href="home">Projects</a>]
+    </tal:block>
+    <tal:block tal:condition="python:request.user.username not in ('admin', 'anonymous',)">
+      [<a href="project?@template=item">New Project</a>]
+    </tal:block>
+    <tal:block tal:condition="python:request.user.username=='admin'">
+      [<a href="home?@template=user">Users</a>]
+    </tal:block>
+    <tal:block tal:condition="python:request.user.username not in ('admin', 'anonymous',)">
+      [<a tal:attributes="href string:user${request/user/id}">Change Password or E-mail</a>]
+    </tal:block>
+    <tal:block tal:condition="python:request.user.username!='anonymous'">
+      [<a tal:attributes="href python:request.indexargs_url('home', {'@action':'logout'})">Log Out <span tal:replace="request/user/username"/></a>]      
+    </tal:block>
+    <tal:block tal:condition="python:request.user.username=='anonymous'">
+      [<a href="home">Log In</a>]
+      [<a href="user?@template=forgotten">Forgotten Password</a>]
+      [<a href="user?@template=register">Register As a New User</a>]
+    </tal:block>    
+    <tal:block tal:condition="python:request.user.username=='admin'">
+      [<a href="user?@template=register">Register New User</a>]
+    </tal:block>    
+  </p>
+</map>
+</div>
+
+<!-- Action message -->
+<p tal:condition="options/error_message | nothing">
+  <em tal:repeat="m options/error_message" tal:content="structure m"/>
+</p>
+<p tal:condition="options/ok_message | nothing">
+  <em tal:repeat="m options/ok_message" tal:content="structure m"/>
+</p>
+
+<!-- Page contents -->
+<h1><span metal:define-slot="title">title</span></h1>
+<tal:block metal:define-slot="content">Page content goes here</tal:block>
+
+</body>
+</html>
+</tal:block>

@@ -1,0 +1,28 @@
+<tal:block metal:use-macro="templates/page/macros/icing">
+<tal:block metal:fill-slot="title" tal:omit-tag="true">Change Password and E-mail</tal:block>
+<tal:block metal:fill-slot="content" tal:omit-tag="true">
+
+  <form method="POST" enctype="multipart/form-data" tal:attributes="action context/designator">
+    <input type="hidden" name="@template" value="item">
+    <p tal:condition="python:context.id and request.user.username == 'admin'">
+      <strong tal:content="string:${context/username}"/>
+    </p>
+    <p>
+      <label>Password:<br><span tal:replace="structure context/password/field"/></label><br>
+      <label>Confirm password:<br><span tal:replace="structure context/password/confirm"/></label><br>
+      <label>Email Address:<br><span tal:replace="structure context/address/field"/></label><br>
+    </p>
+    <p tal:content="structure context/submit"/>
+  </form>
+
+  <form method="POST" enctype="multipart/form-data" tal:attributes="action context/designator"
+        tal:condition="python:context.id and request.user.username == 'admin'">
+    <div>
+      <input type="hidden" name="@action" value="retire">
+      <input type="submit" name="submit" value="Delete Item">
+    </div>
+  </form>
+
+  <tal:block tal:condition="python:context.id and request.user.username == 'admin'" tal:replace="structure context/history"/>
+</tal:block>
+</tal:block>

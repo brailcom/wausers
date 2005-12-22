@@ -1,0 +1,3 @@
+Name: wausers
+Description: Web interface for global user management and authentication.
+Intended-For: Web accessibility testers

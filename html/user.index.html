@@ -1,0 +1,7 @@
+<tal:block tal:repeat="i request/batch">
+  <p>
+    <a tal:attributes="href string:user${i/id}" tal:content="i/username"/>
+    <tal:block tal:condition="i/address">
+      <a tal:attributes="href string:mailto:${i/address}" tal:content="string:&lt;${i/address}&gt;"/>
+    </tal:block>
+</tal:block>

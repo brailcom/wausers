@@ -1,0 +1,30 @@
+<tal:block metal:use-macro="templates/page/macros/icing">
+<tal:block metal:fill-slot="title" tal:omit-tag="true"><span tal:condition="not:context/id" tal:omit-tag="true">New </span>Project</tal:block>
+<tal:block metal:fill-slot="content" tal:omit-tag="true">
+
+  <form method="POST" enctype="multipart/form-data" tal:attributes="action context/designator"
+        tal:condition="not:context/id">
+    <input type="hidden" name="@template" value="item">
+    <input type="hidden" name="user" tal:attributes="value string:${request/user/id}">
+    <p>
+      <label>Project name (only lowercase English letters allowed):<br>
+        <span tal:replace="structure context/project/field"/></label>
+    </p>
+    <input type="hidden" name="@action" value="new">
+    <input type="submit" name="submit" value="Create Project">
+  </form>
+
+  <p tal:condition="context/id">
+    Project:<br>
+    <tt tal:content="context/project"/>
+  </p>
+    
+  <form method="POST" enctype="multipart/form-data" tal:attributes="action context/designator"
+        tal:condition="context/id">
+    <div>
+      <input type="hidden" name="@action" value="retire">
+      <input type="submit" name="submit" value="Delete Project">
+    </div>
+  </form>
+</tal:block>
+</tal:block>
