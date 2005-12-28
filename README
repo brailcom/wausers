@@ -1,0 +1,41 @@
+WAusers
+=======
+
+WAusers is one component of the WAhelper Web accessibility testing suite (see
+http://www.freebsoft.org/wahelper).  WAusers serves for managing Web
+accessibility testing sites where users can register, create their own Web
+accessibility testing projects and log to all the projects using a single
+global password.
+
+Web accessibility testing itself is performed using the WAassistant Web
+application from the WAhelper suite.  WAusers is a supplementary Web
+application managing WAassistant applications.  Both WAusers and WAassistant
+are built on top of the Roundup issue tracking system and their user interfaces
+are similar.
+
+
+* Installation
+
+The following pieces of software are required to run WAusers:
+
+- Roundup 0.8: A flexible issue tracking system available at
+  http://roundup.sf.net .
+
+- WAassistant 0.3 or newer: Web accessibility testing management application
+  available at http://www.freebsoft.org/wahelper .
+
+After installing the required software, unpack the downloaded WAusers
+tarball and copy it to the Roundup trackers directory
+(e.g. /var/lib/roundup/trackers/ on Debian systems).  Then follow Roundup
+tracker installation instructions to install a WAuser tracker.  In order to be
+able to create new projects, a WAassistant tracker template must be available
+in one of the standard Roundup tracker directories or in the same directory
+where the WAusers tracker is created.
+
+
+* Documentation
+
+You can find further information about WAusers in its manual.  WAusers manual
+is in the doc/ subdirectory.  You can build its Info, PDF and HTML versions by
+running `make info', `make pdf' and `make html' commands respectively in the
+doc/ subdirectory.

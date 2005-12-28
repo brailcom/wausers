@@ -1,0 +1,257 @@
+\input texinfo    @c -*-texinfo-*-
+@comment %**start of header
+@setfilename wausers.info
+@set VERSION 0.1
+@settitle WAusers @value{VERSION}
+@comment %**end of header
+@copying
+This manual is for WAusers, @value{VERSION}.
+
+Copyright @copyright{} 2005 Brailcom, o.p.s.
+
+@quotation
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.2 or
+any later version published by the Free Software Foundation; with no
+Invariant Sections, with no Front-Cover Texts and no Back-Cover Texts.
+@end quotation
+
+Alternatively, you can distribute this manual under the same
+conditions as WAusers itself:
+
+@quotation
+WAusers is free software; you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation; either version 2 of the License, or (at your
+option) any later version.
+
+WAusers is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin St, Fifth Floor, Boston,
+MA 02110-1301 USA.
+@end quotation
+@end copying
+
+@dircategory Accessibility
+@dircategory Web
+@direntry
+* WAusers: (wausers).           WAassistant trackers manager.
+@end direntry
+
+@titlepage
+@title WAusers
+@subtitle for version @value{VERSION}
+@author Milan Zamazal
+@author Brailcom, o.p.s.
+@page
+@vskip 0pt plus 1filll
+@insertcopying
+@end titlepage
+
+@contents
+
+@ifnottex
+@node Top, Overview, (dir), (dir)
+@top WAusers
+
+@insertcopying
+@end ifnottex
+
+@menu
+* Overview::                    What is WAusers?
+* Installation::                How to install it.
+* Managing Users and Projects:: How to use WAusers.
+* Customizing WAusers::         Changing WAusers properties.
+* Contact Information::         Bug reporting etc.
+* Index::                       
+@end menu
+
+@c ****************************************************************************
+
+@node Overview, Installation, Top, Top
+@chapter Introduction
+
+The WAhelper project (@url{http://www.freebsoft.org/wahelper}) serves
+as a software tool for testing accessibility of Web sites.  WAhelper
+consists of several components, two of them are:
+
+@table @r
+@item WAchecker
+@cindex WAchecker
+Software library for automated checking accessibility problems of Web
+sites.
+
+@item WAassistant
+@cindex WAassistant
+Web application for managing Web accessibility testing, including
+testing by humans and reviewing the problems reported by WAchecker.
+@end table
+
+WAusers is an assistive tool for managing multiple WAassistant
+installations.  Its typical use is for providing public WAassistant
+services, when you need a global site user database with automated
+user registration and means for creating new WAassistant projects.
+
+In a standard WAassistant project Roundup administrator creates new
+project, then logs in and defines its users, giving them project
+specific login names and passwords.  If a WAassistant project is
+managed by WAusers instead, new projects are created using a Web
+application and WAassistant projects don't store users' passwords,
+WAassistant login names are mapped to WAusers login names for the
+purpose of authentication.  So a single WAusers user uses the same
+password for all WAassistant projects he participates on.
+
+Both WAusers and WAssistant are implemented on top of
+@uref{http://roundup.sf.net,Roundup}, a flexible issue tracking
+system, and their user interfaces are similar.
+
+@c ****************************************************************************
+
+@node Installation, Managing Users and Projects, Overview, Top
+@chapter Installation
+@cindex installation
+
+You can download WAusers from @url{http://www.freebsoft.org/wahelper}.
+The following pieces of software are required to run it:
+
+@table @r
+@item Roundup 0.8
+@cindex Roundup
+Roundup is a flexible issue tracking system available at
+@url{http://roundup.sf.net/}.
+
+@item WAassistant 0.3 or newer
+@cindex WAassistant
+
+WAassistant is a Web application for Web accessibility testing,
+available at the same place as WAusers,
+i.e. @url{http://www.freebsoft.org/wahelper}.
+@end table
+
+After installing the required software, unpack the downloaded WAusers
+tarball and copy it to the Roundup trackers directory
+(e.g. @file{/var/lib/roundup/trackers/} on Debian systems).  Then
+follow Roundup tracker installation instructions to install a WAusers
+tracker.  Usually you need only one WAusers tracker installed.
+
+In order to be able to create new WAassistant tracker you need
+WAassistant template properly installed.  WAusers looks for the
+WAassistant template in standard Roundup template directories and the
+directory where the WAuser tracker is installed (this is also the
+directory where new WAassistant trackers are installed).  The
+WAassistant template must contain properly edited configuration files,
+WAusers changes only tracker name and URL when installing new
+WAassistant projects.
+
+@c ****************************************************************************
+
+@node Managing Users and Projects, Customizing WAusers, Installation, Top
+@chapter Managing Users and Projects
+
+WAusers is a very simple application.  It offers user registration
+functions, common user interface and administrator's interface.
+
+@menu
+* Registration and Login Dialog::  
+* Common User Interface::       
+* Administrator's Interface::   
+@end menu
+
+@node Registration and Login Dialog
+@section Registration and Login Dialog
+
+In the starting dialog you can either log in (or ask for a forgotten
+password) or to register as a new user if you come to the WAusers site
+for the first time.
+
+The WAusers application is intentionally designed not to store any
+privacy information about its users.  The only special information
+asked in the registration process is user's e-mail address and its
+providing is optional.  Currently it serves only for the purpose of
+sending a forgotten password to the user.  In future, it may be used
+also for sending notices regarding the WAusers site (such as
+maintenance notices).
+
+@node Common User Interface
+@section Common User Interface
+
+Regular users who register to the WAusers site can log in and then
+perform the following actions:
+
+@itemize @bullet
+@item
+Create new WAassistant project.  When the project is created, the user
+automatically becomes his owner and administrator.  Then he can log
+into the project in the list of his projects and create regular
+project users in a usual way.
+
+@item
+Display the list of projects.  Both the projects owned (created) by
+the user and the projects which the user can log into are displayed.
+Next to the each project name there is a button for logging into the
+project under the given login name.  Note that a single WAuser user
+can generally log into projects under different login names, depending
+on the particular users created in the project.
+
+After clicking on the name of a project the user owns it's possible to
+delete the project.
+
+@item
+Change his password and/or e-mail address.
+@end itemize
+
+@node Administrator's Interface
+@section Administrator's Interface
+
+User interface of the @samp{admin} user created when installing the
+WAusers tracker is different.  The administrator can perform the
+following actions:
+
+@itemize @bullet
+@item
+Displaying the list of all projects and their administrators.  There
+is nothing else the administrator can do with the projects.
+
+@item
+Displaying the list of all registered users and editing them.  The
+administrator has the power to create, edit and delete users.
+@end itemize
+
+@c ****************************************************************************
+
+@node Customizing WAusers, Contact Information, Managing Users and Projects, Top
+@chapter Customizing WAusers
+@cindex customization
+
+WAusers is a regular Roundup application.  Refer to Roundup
+configuration, customization and design documentation to learn how to
+customize Roundup applications including WAusers.
+
+@c ****************************************************************************
+
+@node Contact Information, Index, Customizing WAusers, Top
+@chapter Contact Information
+@cindex bugs
+@cindex contact
+@cindex home page
+
+WAusers home page is located at
+@uref{http://www.freebsoft.org/wahelper}.
+
+If you have any questions, suggestions, bug reports or anything else
+to tell us, feel free to contact us on the mailing list
+@email{wahelper@@lists.freebsoft.org}.
+
+@c ****************************************************************************
+
+@node Index,  , Contact Information, Top
+@unnumbered Index
+
+@printindex cp
+
+@bye
