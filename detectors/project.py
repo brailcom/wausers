@@ -42,7 +42,7 @@ def _make_project (db, c, nodeid, newvalues):
     try:
         os.mkdir (project_directory)
     except OSError:
-        return "Project name <em>%s</em> is already taken" % (name,)
+        raise Reject ("Project name <em>%s</em> is already taken" % (name,))
     # Create the project
     try:
         # Create project directory
