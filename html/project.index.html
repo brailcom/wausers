@@ -1,5 +1,5 @@
 <tal:block tal:repeat="i request/batch">
   <p>
-    <span tal:replace="i/project"/> (<a tal:attributes="href string:user${i/user/id}" tal:content="i/user"/>)
+    <a tal:attributes="href string:project${i/id}" tal:content="i/project"/> (<a tal:attributes="href string:user${i/user/id}" tal:content="i/user"/>)
   </p>
 </tal:block>
