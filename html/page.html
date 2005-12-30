@@ -42,7 +42,7 @@
   <em tal:repeat="m options/error_message" tal:content="structure m"/>
 </p>
 <p tal:condition="options/ok_message | nothing">
-  <em tal:repeat="m options/ok_message" tal:content="structure m"/>
+  <em tal:repeat="m options/ok_message" tal:content="structure python:utils.transform_message(db._db,m)"/>
 </p>
 
 <!-- Page contents -->
