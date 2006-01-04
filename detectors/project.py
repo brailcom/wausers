@@ -103,7 +103,7 @@ def create_admin_user (db, c, nodeid, olddata):
     project_directory = os.path.join (os.path.dirname (db.config.HOME), c.get (nodeid, 'project'))
     tracker = roundup.instance.open (project_directory)
     tdb = tracker.open (name='admin')
-    tdb.user.create (username=username, wausername=username, roles='Admin', allroles='Admin')
+    tdb.user.create (username=username, wausername=username, roles='Admin', allroles='Admin,Supervisor,Tester,User')
     tdb.commit ()
 
 def remove_logins (db, c, nodeid, newvalues):
