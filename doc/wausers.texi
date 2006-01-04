@@ -7,7 +7,7 @@
 @copying
 This manual is for WAusers, @value{VERSION}.
 
-Copyright @copyright{} 2005 Brailcom, o.p.s.
+Copyright @copyright{} 2005, 2006 Brailcom, o.p.s.
 
 @quotation
 Permission is granted to copy, distribute and/or modify this document
@@ -186,17 +186,17 @@ perform the following actions:
 @itemize @bullet
 @item
 Create new WAassistant project.  When the project is created, the user
-automatically becomes his owner and administrator.  Then he can log
-into the project in the list of his projects and create regular
-project users in a usual way.
+automatically becomes his owner and a user account with the same login
+name and all WAassistant roles including administrator privileges is
+created.  The user can log in from the list of his projects.
 
 @item
 Display the list of projects.  Both the projects owned (created) by
 the user and the projects which the user can log into are displayed.
 Next to the each project name there is a button for logging into the
-project under the given login name.  Note that a single WAuser user
-can generally log into projects under different login names, depending
-on the particular users created in the project.
+project.  Note that a single WAuser user may (depending on the
+WAassistant's @samp{same_login} option setting) log into projects
+under different login names.
 
 After clicking on the name of a project the user owns it's possible to
 delete the project.
