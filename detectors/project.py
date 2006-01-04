@@ -1,6 +1,6 @@
 ### project.py --- Project auditors
 
-## Copyright (C) 2005 Brailcom, o.p.s.
+## Copyright (C) 2005, 2006 Brailcom, o.p.s.
 ##
 ## Author: Milan Zamazal <pdm@brailcom.org>
 ##
@@ -37,6 +37,8 @@ def _audit_project (db, c, nodeid, newvalues):
 
 def _make_project (db, c, nodeid, newvalues):
     name = newvalues['project']
+    if not newvalues.get ('user'):
+        raise Reject ("No project creator given")
     # Create project directory
     project_directory = os.path.join (os.path.dirname (db.config.HOME), name)
     try:
@@ -92,8 +94,17 @@ def create_project (db, c, nodeid, newvalues):
 
 def create_admin_user (db, c, nodeid, olddata):
     # This has to be a reactor, because login refers to the project
-    db.login.create (user=c.get (nodeid, 'user'), project=nodeid, login='admin')
+    userid = c.get (nodeid, 'user')
+    username = db.user.get (userid, 'username')
+    db.login.create (user=userid, project=nodeid, login='admin')
     db.commit ()
+    # Now create the Admin user -- must be in reactor in order to get working
+    # login registration
+    project_directory = os.path.join (os.path.dirname (db.config.HOME), c.get (nodeid, 'project'))
+    tracker = roundup.instance.open (project_directory)
+    tdb = tracker.open (name='admin')
+    tdb.user.create (username=username, wausername=username, roles='Admin', allroles='Admin')
+    tdb.commit ()
 
 def remove_logins (db, c, nodeid, newvalues):
     for id in db.login.find (project=nodeid):
