@@ -1,12 +1,17 @@
 <tal:block tal:repeat="i request/batch"
-           tal:define="userid python:db._db.user.lookup(str(request.user.username)); password python:db._db.user.get(userid,'password')">
-  <p>
-    <form method="POST" tal:attributes="action python:db.config.TRACKER_WEB[0:db.config.TRACKER_WEB[:-1].rfind('/')+1]+str(i.project)+'/'">
-      <input type="hidden" name="__login_name" tal:attributes="value i/login">
-      <input type="hidden" name="__login_password" tal:attributes="value password">
-      <input type="hidden" name="@action" value="Login">
-      <a tal:attributes="href string:project${i/project/id}" tal:content="i/project"/>
-      <input type="submit" name="submit" tal:attributes="value string:Log in as ${i/login}">
-    </form>
-  </p>
+           tal:define="userid python:db._db.user.lookup(str(request.user.username));
+                       password python:db._db.user.get(userid,'password')">
+  <tal:block tal:define="morelogins python:len(db._db.login.find(project=str(i.id),user=str(userid)))>2">
+    <p tal:condition="python:i.login!='admin'">
+      <form method="POST" tal:attributes="action python:db.config.TRACKER_WEB[0:db.config.TRACKER_WEB[:-1].rfind('/')+1]+str(i.project)+'/'">
+        <input type="hidden" name="__login_name" tal:attributes="value i/login">
+        <input type="hidden" name="__login_password" tal:attributes="value password">
+        <input type="hidden" name="@action" value="Login">
+        <a tal:attributes="href string:project${i/project/id}" tal:content="i/project"/>
+        <tal:block tal:define="label python:'Log in'+(morelogins and (' as '+i.login) or '')">
+          <input type="submit" name="submit" tal:attributes="value label">
+        </tal:block>
+      </form>
+    </p>
+  </tal:block>
 </tal:block>

@@ -30,7 +30,7 @@
     </tal:block>
     
     <tal:block tal:condition="python:request.user.username not in ('anonymous','admin',)">
-      <tal:block tal:replace="structure python:db.login.renderWith('index',group=('+','project',),sort=('+','login'),pagesize=1000)"/>
+      <tal:block tal:replace="structure python:db.login.renderWith('index',filterspec={'user':request.user.id},group=('+','project',),sort=('+','login'),pagesize=1000)"/>
     </tal:block>
   </tal:block>
 </tal:block>
