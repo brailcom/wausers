@@ -1,6 +1,6 @@
 ### waauth.py --- User authentication
 
-## Copyright (C) 2005 Brailcom, o.p.s.
+## Copyright (C) 2005, 2006 Brailcom, o.p.s.
 ##
 ## Author: Milan Zamazal <pdm@brailcom.org>
 ##
@@ -87,7 +87,7 @@ def remove_user (project, login, user, tracker_home):
     def action (db, project_id, user_id, login):
         for id in db.login.find (user=user_id, project=project_id):
             if db.login.get (id, 'login') == login:
-                db.login.retire (project=project_id, user=user_id, login=login)
+                db.login.retire (id)
                 break
         else:
            return "No corresponding login entry found"
