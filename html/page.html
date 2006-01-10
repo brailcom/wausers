@@ -20,7 +20,7 @@
       [<a href="home?@template=user">Users</a>]
     </tal:block>
     <tal:block tal:condition="python:request.user.username not in ('admin', 'anonymous',)">
-      [<a tal:attributes="href string:user${request/user/id}">Change Password or E-mail</a>]
+      [<a tal:attributes="href string:user${request/user/id}">Password and Contact</a>]
     </tal:block>
     <tal:block tal:condition="python:request.user.username!='anonymous'">
       [<a tal:attributes="href python:request.indexargs_url('home', {'@action':'logout'})">Log Out <span tal:replace="string:${request/user/username}@${db/config/TRACKER_NAME}"/></a>]      

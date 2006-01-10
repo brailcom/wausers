@@ -169,13 +169,14 @@ In the starting dialog you can either log in (or ask for a forgotten
 password) or to register as a new user if you come to the WAusers site
 for the first time.
 
-The WAusers application is intentionally designed not to store any
-privacy information about its users.  The only special information
-asked in the registration process is user's e-mail address and its
-providing is optional.  Currently it serves only for the purpose of
-sending a forgotten password to the user.  In future, it may be used
-also for sending notices regarding the WAusers site (such as
-maintenance notices).
+New users are asked for login name, password, e-mail address and other
+contact information.  Providing e-mail address is optional, it serves
+currently only for the purpose of resetting forgotten user's password
+(it's not possible to reset password for a user without e-mail
+address).  In future, it may be used also for sending notices
+regarding the WAusers site (such as maintenance notices).  Other
+contact information is completely optional, it is displayed to users
+participating on the same WAassistant projects.
 
 @node Common User Interface
 @section Common User Interface

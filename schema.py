@@ -1,6 +1,6 @@
 ### schema.py --- WAservice database schema
 
-## Copyright (C) 2005 Brailcom, o.p.s.
+## Copyright (C) 2005, 2006 Brailcom, o.p.s.
 ##
 ## Author: Milan Zamazal <pdm@brailcom.org>
 ##
@@ -44,6 +44,11 @@ user = Class (db, 'user',
               password=Password (),
               address=String(),
               roles=String (),  # comma-separated string of Role names
+              realname=String (),
+              phone=String (),
+              organisation=String (),
+              alternate_addresses=String (),
+              timezone=String (),
               )
 user.setkey ('username')
 
@@ -69,12 +74,12 @@ for role in 'Admin', 'User', 'Anonymous':
     db.security.addPermissionToRole (role, 'Web Access')
 # Users -- creation
 db.security.addPermissionToRole ('Admin', 'Create', 'user')
-properties=('username', 'password', 'address',)
+properties=('username', 'password', 'address', 'realname', 'phone', 'organisation', 'alternate_addresses',)
 db.security.addPermission (name='Create', klass='user', properties=properties)
 # this doesn't seem to work reliably, access is granted to all properties
 db.security.addPermissionToRole ('Anonymous', 'Create', classname='user', properties=properties)
 # Users -- editing
-properties = ('password', 'address',)
+properties = ('password', 'address', 'realname', 'phone', 'organisation', 'alternate_addresses',)
 def permission_view_user (db, userid, itemid):
     return userid == itemid
 def permission_edit_user (db, userid, itemid):

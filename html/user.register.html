@@ -15,16 +15,31 @@
       <input type="hidden" name="@template" value="register">
       <p>
         <input type="hidden" name="@required" value="username">
-        <label>Login name (only lowercase English letters allowed):<br>
+        <label><strong>Login name</strong> (only lowercase English letters allowed)<strong>:</strong><br>
           <span tal:replace="structure context/username/field"/>
         </label><br>
-        <label>Password:<br><span tal:replace="structure context/password/field"/></label><br>
-        <label>Confirm password:<br><span tal:replace="structure context/password/confirm"/></label><br>
-        <label>Email Address (optional):<br><span tal:replace="structure context/address/field"/></label><br>
-        <em>Providing your e-mail address is optional, but if we don't know it we
-          won't be able to reset your password in case you forget it.</em>
+        <label><strong>Password:</strong><br><span tal:replace="structure context/password/field"/></label><br>
+        <label><strong>Confirm password:</strong><br><span tal:replace="structure context/password/confirm"/></label><br>
       </p>
-      <p tal:content="structure context/submit"/>
+      <p>
+        <em>Providing your e-mail address is optional, but if we don't know it we
+          won't be able to reset your password in case you forget it.</em><br>
+        <label>Email Address:<br>
+          <span tal:replace="structure context/address/field"/></label><br>
+      </p>
+      <p>
+        <em>The following items are completely optional.</em><br>
+        <label tal:omit-tag="not:context/realname/is_edit_ok">Name:<br><span tal:replace="structure context/realname/field"/></label><br>
+        <label tal:omit-tag="not:context/phone/is_edit_ok">Phone:<br><span tal:replace="structure context/phone/field"/></label><br>
+        <label tal:omit-tag="not:context/organisation/is_edit_ok">Organization:<br><span tal:replace="structure context/organisation/field"/></label><br>
+        <label tal:omit-tag="not:context/alternate_addresses/is_edit_ok">Alternate e-mail addresses:<br>
+          <span tal:replace="structure context/alternate_addresses/multiline"/>
+        </label>
+      </p>
+      <p>
+        <input type="hidden" name="@action" value="new">
+        <input type="submit" name="submit" value="Register">
+      </p>
     </form>
   </tal:block>
 </tal:block>
