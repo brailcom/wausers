@@ -74,14 +74,28 @@ def add_user (project, login, user, tracker_home):
         db.login.create (project=project_id, user=user_id, login=login)
     return _modify_user (project, login, user, tracker_home, action)
 
-def check_user (user, tracker_home):
+def _user_id (user, tracker_home):
     tracker = roundup.instance.open (tracker_home)
     db = tracker.open ()
     try:
         user_id = db.user.lookup (user)
     except KeyError:
-        return False
-    return True
+        return None, None
+    return user_id, db
+    
+def check_user (user, tracker_home):
+    return _user_id (user, tracker_home)[0] and True or False
+
+def user_data (user, tracker_home):
+    id, db = _user_id (user, tracker_home)
+    data = {}
+    user = db.user
+    if id:
+        for property in 'address', 'realname', 'phone', 'organisation', 'alternate_addresses',:
+            value = user.get (id, property)
+            if value:
+                data[property] = value
+    return data
 
 def remove_user (project, login, user, tracker_home):
     def action (db, project_id, user_id, login):
