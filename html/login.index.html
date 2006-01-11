@@ -7,7 +7,8 @@
         <input type="hidden" name="__login_name" tal:attributes="value i/login">
         <input type="hidden" name="__login_password" tal:attributes="value password">
         <input type="hidden" name="@action" value="Login">
-        <a tal:attributes="href string:project${i/project/id}" tal:content="i/project"/>
+        <a tal:attributes="href string:project${i/project/id}" tal:content="i/project"
+           tal:omit-tag="python:i.project.user!=userid"/>
         <tal:block tal:define="label python:'Log in'+(morelogins and (' as '+i.login) or '')">
           <input type="submit" name="submit" tal:attributes="value label">
         </tal:block>

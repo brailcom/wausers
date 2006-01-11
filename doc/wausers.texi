@@ -199,8 +199,8 @@ project.  Note that a single WAuser user may (depending on the
 WAassistant's @samp{same_login} option setting) log into projects
 under different login names.
 
-After clicking on the name of a project the user owns it's possible to
-delete the project.
+The owner of the project can click on the project name and then to
+delete the project using the delete button.
 
 @item
 Change his password and/or e-mail address.
