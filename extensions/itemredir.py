@@ -44,15 +44,6 @@ class Retire_Action (roundup.cgi.actions.RetireAction):
             raise roundup.cgi.exceptions.Redirect, '%shome' % (self.base,)
 
 
-def replace_action (action):
-    if action[0] == 'new':
-        action = ('new', New_Item_Action)
-    elif action[0] == 'retire':
-        action = ('retire', Retire_Action)
-    return action
-    
-roundup.cgi.client.Client.actions = tuple ([replace_action (a) for a in roundup.cgi.client.Client.actions])
-
-
 def init (instance):
-    pass
+    instance.registerAction ('new', New_Item_Action)
+    instance.registerAction ('retire', Retire_Action)
