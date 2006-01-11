@@ -43,6 +43,11 @@ class Retire_Action (roundup.cgi.actions.RetireAction):
         if self.classname == 'project':
             raise roundup.cgi.exceptions.Redirect, '%shome' % (self.base,)
 
+    def hasPermission (self, permission, classname=roundup.cgi.actions.RetireAction._marker, itemid=None):
+        if itemid is None:
+            itemid = self.nodeid
+        return roundup.cgi.actions.RetireAction.hasPermission (self, permission, classname, itemid)
+
 
 def init (instance):
     instance.registerAction ('new', New_Item_Action)
