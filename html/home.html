@@ -10,7 +10,13 @@
         <p>
           <label>Username:<br><input size="10" name="__login_name"></label><br>
           <label>Password:<br><input size="10" type="password" name="__login_password"></label><br>
-          <input type="hidden" name="@action" value="Login">
+          <input tal:condition="request/form/__login_redirect/value | false"
+                 type="hidden" name="__login_redirect"
+                 tal:attributes="value request/form/__login_redirect/value">
+          <input tal:condition="request/form/__login_redirect/value | false"
+                 type="hidden" name="__login_project"
+                 tal:attributes="value request/form/__login_project/value">
+          <input type="hidden" name="@action" value="login">
         </p>
         <p>
           <input type="submit" value="Login"><br>
@@ -24,6 +30,9 @@
         </p>        
       </form>
     </tal:block>
+    
+    <tal:block tal:condition="python:request.user.username!='anonymous'"
+               tal:replace="python:utils.redirlogin(db._db,request)"/>
     
     <tal:block tal:condition="python:request.user.username=='admin'">
       <tal:block tal:replace="structure python:db.project.renderWith('index',sort=('+','project',),pagesize=1000)"/>
